@@ -94,7 +94,14 @@ proc main() {
   var env: environment;
   env["x"] = 3;
 
+  // By having the fields be generic management, this works:
   var tree = new MultExp(new VarExp("x"), new IntExp(2));
-
   process(env, tree);
+  
+  // and so does this:
+  var tree2 = new shared MultExp(new shared VarExp("x"), new shared IntExp(2));
+  process(env, tree2);
+
+  // in other words, it allows the Exp classes to not be fussy
+  // about how they are created.
 }
